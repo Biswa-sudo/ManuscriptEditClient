@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Lead Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+        h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select, textarea, button {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        input[type="checkbox"], input[type="radio"] {
+            margin-right: 10px;
+            margin-top: 0;
+        }
+        .checkbox-group, .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Business Lead Form</h2>
+        <form id="leadForm">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="contact-method">Preferred Contact Method</label>
+            <select id="contact-method" name="contact-method" required>
+                <option value="email">Email</option>
+                <option value="phone">Phone</option>
+                <option value="whatsapp">WhatsApp</option>
+            </select>
+
+            <label>Type of Service Interested In</label>
+            <div class="checkbox-group">
+                <input type="checkbox" id="consultation" name="service" value="Consultation">
+                <label for="consultation">Consultation</label>
+                <input type="checkbox" id="product-inquiry" name="service" value="Product Inquiry">
+                <label for="product-inquiry">Product Inquiry</label>
+                <input type="checkbox" id="support" name="service" value="Support">
+                <label for="support">Support</label>
+                <input type="checkbox" id="other" name="service" value="Other">
+                <label for="other">Other</label>
+            </div>
+
+            <label>Preferred Contact Time</label>
+            <div class="radio-group">
+                <input type="radio" id="morning" name="contact-time" value="Morning" required>
+                <label for="morning">Morning</label>
+                <input type="radio" id="afternoon" name="contact-time" value="Afternoon">
+                <label for="afternoon">Afternoon</label>
+                <input type="radio" id="evening" name="contact-time" value="Evening">
+                <label for="evening">Evening</label>
+            </div>
+
+            <label for="comments">Additional Comments</label>
+            <textarea id="comments" name="comments" rows="4"></textarea>
+
+            <button type="button" id="submitBtn">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const contactMethod = document.getElementById('contact-method').value;
+            
+            const services = [];
+            document.querySelectorAll('input[name="service"]:checked').forEach((checkbox) => {
+                services.push(checkbox.value);
+            });
+            
+            const contactTime = document.querySelector('input[name="contact-time"]:checked').value;
+            const comments = document.getElementById('comments').value;
+
+            const message = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nPreferred Contact Method: ${contactMethod}\nServices: ${services.join(', ')}\nPreferred Contact Time: ${contactTime}\nComments: ${comments}`;
+
+            const whatsappURL = `https://wa.me/917008131178?text=${encodeURIComponent(message)}`;
+
+            window.open(whatsappURL, '_blank');
+        });
+    </script>
+</body>
+</html>
